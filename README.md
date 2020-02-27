@@ -27,7 +27,7 @@ Use 4 VMs to create a Rancher_HA cluster
 4. Swap is disabled
 5. Take snapshots prior to installations, this way you can install and revert to snapshot if needed
 
-# REPEAT FOR ALL 7 VMs
+# Repeat For All 4 VMs
 
 1. Add all nodes to the /etc/hosts hosts file includes name to IP mappings for VMs or DNS
 ~~~
