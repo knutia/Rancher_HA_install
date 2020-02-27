@@ -12,8 +12,7 @@ Use 4 VMs to create a Rancher_HA cluster
 
 1. Add all nodes to the /etc/hosts hosts file includes name to IP mappings for VMs or DNS
 ~~~
-array=("192.168.2.100 c3-rancher-ha-lb" "192.168.2.101 c3-rancher-ha-1" "192.168.2.102 c3-rancher-ha-2" "192.168.2.103 c3-rancher-ha-3")   
-for ix in ${!array[*]}; do printf "%s\n" "${array[$ix]}">>/etc/hosts; done
+sudo bash -c 'array=("192.168.2.100 c3-rancher-ha-lb" "192.168.2.101 c3-rancher-ha-1" "192.168.2.102 c3-rancher-ha-2" "192.168.2.103 c3-rancher-ha-3") && for ix in ${!array[*]}; do printf "%s\n" "${array[$ix]}">>/etc/hosts; done'
 ~~~
 
 2. Disable swap, swapoff then edit your fstab removing any entry for swap partitions. You can recover the space with fdisk. You may want to reboot to ensure your config is ok.
