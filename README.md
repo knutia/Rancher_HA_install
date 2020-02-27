@@ -59,19 +59,19 @@ sudo systemctl enable docker.service
 
 3. Create nginx config file
 ~~~~
-mkdir /etc/nginx
-wget -O /etc/nginx/nginx.conf https://raw.githubusercontent.com/knutia/Kubernetes_HA_install/master/nginx.conf
+sudo mkdir /etc/nginx
+sudo wget -O /etc/nginx/nginx.conf https://raw.githubusercontent.com/knutia/Rancher_HA_install/master/nginx.conf
 ~~~~
 Replase <IP_DNSNAME_HA_1>, <IP_DNSNAME_HA_2> and <IP_DNSNAME_HA_3> whit the real ip or FQDN for the 3 master nodes in the /etc/nginx/nginx.conf file.
 Eksample:
 ~~~
-sed -i 's/<IP_DNSNAME_HA_1>/192.168.2.101/g' /etc/nginx/nginx.conf
-sed -i 's/<IP_DNSNAME_HA_2>/192.168.2.102/g' /etc/nginx/nginx.conf
-sed -i 's/<IP_DNSNAME_HA_3>/192.168.2.103/g' /etc/nginx/nginx.conf
+sudo sed -i 's/<IP_DNSNAME_HA_1>/192.168.2.101/g' /etc/nginx/nginx.conf
+sudo sed -i 's/<IP_DNSNAME_HA_2>/192.168.2.102/g' /etc/nginx/nginx.conf
+sudo sed -i 's/<IP_DNSNAME_HA_3>/192.168.2.103/g' /etc/nginx/nginx.conf
 ~~~
 
 
 4. Start nginx server using config file
 ~~~~
-sudo docker run -d --restart=unless-stopped -p 80:80 -p 443:443 -p 6443:6443 -v /etc/nginx/nginx.conf:/etc/nginx/nginx.conf nginx:1.14
+sudo docker run -d --restart=unless-stopped -p 80:80 -p 443:443 -v /etc/nginx/nginx.conf:/etc/nginx/nginx.conf nginx:1.14
 ~~~~
