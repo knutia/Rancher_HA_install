@@ -56,7 +56,7 @@ sudo systemctl enable docker.service
 ~~~~
 
 ~~~~
-usermod -aG docker ubuntu
+sudo usermod -aG docker ubuntu
 ~~~~
 
 
@@ -64,7 +64,7 @@ usermod -aG docker ubuntu
 
 
 
-3. Create nginx config file
+1. Create nginx config file
 ~~~~
 sudo mkdir /etc/nginx
 sudo wget -O /etc/nginx/nginx.conf https://raw.githubusercontent.com/knutia/Rancher_HA_install/master/nginx.conf
@@ -78,7 +78,7 @@ sudo sed -i 's/<IP_DNSNAME_HA_3>/192.168.2.103/g' /etc/nginx/nginx.conf
 ~~~
 
 
-4. Start nginx server using config file
+2. Start nginx server using config file
 ~~~~
 sudo docker run -d --restart=unless-stopped -p 80:80 -p 443:443 -v /etc/nginx/nginx.conf:/etc/nginx/nginx.conf nginx:1.14
 ~~~~
