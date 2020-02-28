@@ -45,19 +45,26 @@ sudo vi /etc/fstab
 sudo apt-get update && sudo apt-get upgrade -y && sudo apt autoremove -y
 ~~~~
 
-# Create Loadbalancer
-
-1. Install the required packages, if needed we can request a specific version
+4. Install the required packages, if needed we can request a specific version
 ~~~~
 sudo apt-get install -y docker.io
 ~~~~
 
-2. Ensure both are set to start when the system starts up.
+5. Ensure both are set to start when the system starts up.
 ~~~~
 sudo systemctl enable docker.service
 ~~~~
 
-3. Create nginx config file
+~~~~
+sudo usermod -aG docker ubuntu
+~~~~
+
+
+# Create Loadbalancer
+
+
+
+1. Create nginx config file
 ~~~~
 sudo mkdir /etc/nginx
 sudo wget -O /etc/nginx/nginx.conf https://raw.githubusercontent.com/knutia/Rancher_HA_install/master/nginx.conf
@@ -71,7 +78,7 @@ sudo sed -i 's/<IP_DNSNAME_HA_3>/192.168.2.103/g' /etc/nginx/nginx.conf
 ~~~
 
 
-4. Start nginx server using config file
+2. Start nginx server using config file
 ~~~~
 sudo docker run -d --restart=unless-stopped -p 80:80 -p 443:443 -v /etc/nginx/nginx.conf:/etc/nginx/nginx.conf nginx:1.14
 ~~~~
