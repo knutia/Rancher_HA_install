@@ -1,0 +1,26 @@
+nodes:
+  - address: 192.168.2.101
+    user: ubuntu
+    role: [controlplane, worker, etcd]
+  - address: 192.168.2.102
+    user: ubuntu
+    role: [controlplane, worker, etcd]
+  - address: 192.168.2.103
+    user: ubuntu
+    role: [controlplane, worker, etcd]
+
+services:
+  etcd:
+    snapshot: true
+    creation: 6h
+    retention: 24h
+
+# Required for external TLS termination with
+# ingress-nginx v0.22+
+ingress:
+  provider: nginx
+  options:
+    use-forwarded-headers: "true"
+    
+ssh_key_path: 'C:\Users\e217974\Desktop\Global1.key'
+# kubernetes_version: "v1.17.0-rancher1-2"

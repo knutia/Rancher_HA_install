@@ -75,3 +75,19 @@ sudo sed -i 's/<IP_DNSNAME_HA_3>/192.168.2.103/g' /etc/nginx/nginx.conf
 ~~~~
 sudo docker run -d --restart=unless-stopped -p 80:80 -p 443:443 -v /etc/nginx/nginx.conf:/etc/nginx/nginx.conf nginx:1.14
 ~~~~
+
+
+# Rek
+
+rke up --config ./rancher-cluster.yml
+
+$Env:KUBECONFIG = ".\kube_config_rancher-cluster.yml"
+
+helm 3.0.3:
+helm repo add rancher-stable https://releases.rancher.com/server-charts/stable
+helm repo update
+
+kubectl create namespace cattle-system
+kubectl apply -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.6/deploy/manifests/00-crds.yaml
+
+helm install rancher rancher-stable/rancher --namespace cattle-system --set hostname=c3-rancher-ha-lb
