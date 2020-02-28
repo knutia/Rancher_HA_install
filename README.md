@@ -45,17 +45,24 @@ sudo vi /etc/fstab
 sudo apt-get update && sudo apt-get upgrade -y && sudo apt autoremove -y
 ~~~~
 
-# Create Loadbalancer
-
-1. Install the required packages, if needed we can request a specific version
+4. Install the required packages, if needed we can request a specific version
 ~~~~
 sudo apt-get install -y docker.io
 ~~~~
 
-2. Ensure both are set to start when the system starts up.
+5. Ensure both are set to start when the system starts up.
 ~~~~
 sudo systemctl enable docker.service
 ~~~~
+
+~~~~
+usermod -aG docker ubuntu
+~~~~
+
+
+# Create Loadbalancer
+
+
 
 3. Create nginx config file
 ~~~~
