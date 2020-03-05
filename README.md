@@ -62,8 +62,6 @@ sudo usermod -aG docker ubuntu
 
 # Create Loadbalancer
 
-
-
 1. Create nginx config file
 ~~~~
 sudo mkdir /etc/nginx
@@ -77,7 +75,6 @@ sudo sed -i 's/<IP_DNSNAME_HA_2>/192.168.2.102/g' /etc/nginx/nginx.conf
 sudo sed -i 's/<IP_DNSNAME_HA_3>/192.168.2.103/g' /etc/nginx/nginx.conf
 ~~~
 
-
 2. Start nginx server using config file
 ~~~~
 sudo docker run -d --restart=unless-stopped -p 80:80 -p 443:443 -v /etc/nginx/nginx.conf:/etc/nginx/nginx.conf nginx:1.14
@@ -86,16 +83,22 @@ sudo docker run -d --restart=unless-stopped -p 80:80 -p 443:443 -v /etc/nginx/ng
 
 # RKE (Kubernetes Cluster)
 ~~~
+sudo wget https://raw.githubusercontent.com/knutia/Rancher_HA_install/master/rancher-cluster.yml
+~~~
+
+~~~
 sudo sed -i 's/<IP_DNSNAME_HA_1>/192.168.2.101/g' ./rancher-cluster.yml
 sudo sed -i 's/<IP_DNSNAME_HA_2>/192.168.2.102/g' ./rancher-cluster.yml
 sudo sed -i 's/<IP_DNSNAME_HA_3>/192.168.2.103/g' ./rancher-cluster.yml
 ~~~
 
 ~~~
-sudo sed -i 's/<PATH_TO PUBLIC _KEY>/C:\Users\e217974\Desktop\public.key/g' ./rancher-cluster.yml
+sudo sed -i 's/<PATH_TO PUBLIC _KEY>/C:\\Users\\e217974\\Desktop\\public.key/g' ./rancher-cluster.yml
 ~~~
 
+~~~
 rke up --config ./rancher-cluster.yml
+~~~
 
 ## Testing Your Cluster
 ~~~
