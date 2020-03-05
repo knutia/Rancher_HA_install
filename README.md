@@ -84,17 +84,50 @@ sudo docker run -d --restart=unless-stopped -p 80:80 -p 443:443 -v /etc/nginx/ng
 ~~~~
 
 
-# Rek
+# RKE (Kubernetes Cluster)
+~~~
+sudo sed -i 's/<IP_DNSNAME_HA_1>/192.168.2.101/g' ./rancher-cluster.yml
+sudo sed -i 's/<IP_DNSNAME_HA_2>/192.168.2.102/g' ./rancher-cluster.yml
+sudo sed -i 's/<IP_DNSNAME_HA_3>/192.168.2.103/g' ./rancher-cluster.yml
+~~~
+
+~~~
+sudo sed -i 's/<PATH_TO PUBLIC _KEY>/C:\Users\e217974\Desktop\public.key/g' ./rancher-cluster.yml
+~~~
 
 rke up --config ./rancher-cluster.yml
 
+## Testing Your Cluster
+~~~
 $Env:KUBECONFIG = ".\kube_config_rancher-cluster.yml"
+~~~
+
+~~~
+kubectl get nodes
+~~~
+
+## Check the Health of Your Cluster Pods
+~~~
+kubectl get pods --all-namespaces
+~~~
+
+# Install Rancher on the Kubernetes Cluster
 
 helm 3.0.3:
+~~~
 helm repo add rancher-stable https://releases.rancher.com/server-charts/stable
+~~~
+~~~
 helm repo update
-
+~~~
+~~~
 kubectl create namespace cattle-system
+~~~
+~~~
 kubectl apply -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.6/deploy/manifests/00-crds.yaml
-
+~~~
+~~~
 helm install rancher rancher-stable/rancher --namespace cattle-system --set hostname=c3-rancher-ha-lb
+~~~
+
+

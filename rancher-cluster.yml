@@ -1,11 +1,11 @@
 nodes:
-  - address: 192.168.2.101
+  - address: <IP_DNSNAME_HA_1>
     user: ubuntu
     role: [controlplane, worker, etcd]
-  - address: 192.168.2.102
+  - address: <IP_DNSNAME_HA_3>
     user: ubuntu
     role: [controlplane, worker, etcd]
-  - address: 192.168.2.103
+  - address: <IP_DNSNAME_HA_3>
     user: ubuntu
     role: [controlplane, worker, etcd]
 
@@ -22,5 +22,5 @@ ingress:
   options:
     use-forwarded-headers: "true"
     
-ssh_key_path: 'C:\Users\e217974\Desktop\Global1.key'
+ssh_key_path: '<PATH_TO PUBLIC _KEY>'
 # kubernetes_version: "v1.17.0-rancher1-2"
